@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { TEAM_CODES } from '../data/tournamentData'
 
-const API_URL = 'http://localhost:5001/predict'
+const API_URL = 'https://wc2026-predictor-15jf.onrender.com/predict'
 
 export default function PredictionPanel({ home, away }) {
   const [state, setState] = useState('loading')

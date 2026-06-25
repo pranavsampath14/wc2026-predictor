@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { TEAM_CODES } from '../data/tournamentData'
 
-const API_URL = 'http://localhost:5001/simulate'
+const API_URL = 'https://wc2026-predictor-15jf.onrender.com/simulate'
 
 function TeamRow({ rank, team, prob, maxProb, color }) {
   return (

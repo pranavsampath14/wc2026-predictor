@@ -4,7 +4,7 @@ import { GROUPS, API_NAME_MAP, TEAM_CODES } from '../data/tournamentData'
 import ReactCountryFlag from 'react-country-flag'
 import PredictionPanel from '../components/PredictionPanel'
 
-const API_URL = 'http://localhost:5001/predict'
+const API_URL = 'https://wc2026-predictor-15jf.onrender.com/predict'
 
 export default function Group() {
   const { groupId } = useParams()
