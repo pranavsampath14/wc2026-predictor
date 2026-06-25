@@ -58,15 +58,23 @@ def precompute_probabilities():
     
     return cache
 
-print("Precomputing match probabilities now:")
-prob_cache = precompute_probabilities()
-print(f"Done. {len(prob_cache)} matchups cached.")
+prob_cache = None
+goals_cache = None
+
+def initialise_caches():
+    global prob_cache, goals_cache
+    if prob_cache is None:
+        print("Precomputing match probabilities now:")
+        prob_cache = precompute_probabilities()
+        goals_cache = precompute_goals()
+        print("Caches built.")
 
 def simulate_match(home_team, away_team):
     outcomes = [home_team, 'draw', away_team]
     probs = prob_cache[(home_team, away_team)]
     probs = np.array(probs)
-    probs = probs / probs.sum()  # normalise to exactly 1
+    # normalise to exactly 1
+    probs = probs / probs.sum()
     return np.random.choice(outcomes, p=probs)
 
 def precompute_goals():
@@ -80,8 +88,6 @@ def precompute_goals():
     
     return cache
 
-goals_cache = precompute_goals()
-print(f"Goals cache built for {len(goals_cache)} teams.")
 
 def simulate_scoreline(home_team, away_team, winner):
     home_xg = (goals_cache[home_team]['scored'] + goals_cache[away_team]['conceded']) / 2
@@ -276,6 +282,7 @@ def simulate_knockout(matchups, results):
 
 
 def simulate_tournament():
+    initialise_caches();
     # initialise results tracker for all 48 teams
     all_teams = [team for teams in GROUPS.values() for team in teams]
     results = {team: {'r32': 0, 'r16': 0, 'qf': 0, 'sf': 0, 'final': 0, 'winner': 0} for team in all_teams}
